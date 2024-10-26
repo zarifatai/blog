@@ -28,11 +28,11 @@ const getArticle = async (slug: string) => {
     date: metadata.date,
     author: metadata.author,
     excerpt: metadata.excerpt,
+    slug: slug,
   }
   const article: Article = {
     frontMatter: frontMatter,
     content: html,
-    slug: slug,
   }
 
   return article

@@ -9,7 +9,7 @@ export default async function PostsOverview() {
   return (
     <div>
       {frontMatters?.map((frontMatter) => (
-        <div>
+        <div key={frontMatter.slug}>
           <h3>{frontMatter.title}</h3>
           <h4>{frontMatter.date}</h4>
           <h4>{frontMatter.author}</h4>
@@ -32,11 +32,13 @@ const getFrontMatters = async () => {
         const markdownWithMeta = await fs.readFile(filePath, "utf-8");
 
         const { data: metadata } = matter(markdownWithMeta);
+        const slug = file.replace(".md", "");
         const frontMatter: FrontMatter = {
           title: metadata.title,
           date: metadata.date,
           author: metadata.author,
           excerpt: metadata.excerpt,
+          slug: slug,
         };
 
         return frontMatter;
